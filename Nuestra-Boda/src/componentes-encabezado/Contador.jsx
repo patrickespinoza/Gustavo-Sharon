@@ -1,28 +1,57 @@
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+// ==========================================
+// CONFIGURACIÓN - GUSTAVO & SHARON
+// ==========================================
+
+const COLORES = {
+  naranja: "#B9471B",
+  naranjaOscuro: "#A8431E",
+  champagne: "#F1D5BF",
+  marfil: "#FFF8F0",
+  cafe: "#713819",
+  cafeOscuro: "#422314",
+  blanco: "#FFFFFF",
+};
+
+// ==========================================
+// COMPONENTE CONTADOR
+// ==========================================
+
 const Contador = ({
-  titulo = "¡Estás invitado!",
-  texto = "Nos encantaría que seas parte de este momento tan especial para nosotros.",
-  frase = "¡Falta poco!",
-  fecha = "2027-07-11T00:00:00",
+  titulo = "Faltan",
+  texto = "PARA NUESTRO GRAN DÍA",
+  frase = "11 de diciembre de 2026",
+  fecha = "2026-12-11T00:00:00",
 }) => {
+
+  // ==========================================
+  // CALCULAR TIEMPO RESTANTE
+  // ==========================================
+
   const calculateTime = () => {
-    const difference = +new Date(fecha) - +new Date();
+    const difference = new Date(fecha).getTime() - Date.now();
 
     if (difference > 0) {
       return {
         Días: Math.floor(difference / (1000 * 60 * 60 * 24)),
         Horas: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        Minutos: Math.floor((difference / 1000 / 60) % 60),
+        Minutos: Math.floor((difference / (1000 * 60)) % 60),
         Segundos: Math.floor((difference / 1000) % 60),
       };
     }
 
-    return {};
+    return {
+      Días: 0,
+      Horas: 0,
+      Minutos: 0,
+      Segundos: 0,
+    };
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTime());
+  const [timeLeft, setTimeLeft] = useState(calculateTime);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -32,101 +61,286 @@ const Contador = ({
     return () => clearInterval(timer);
   }, [fecha]);
 
+  const tiempoTerminado = Object.values(timeLeft).every(
+    (valor) => valor === 0
+  );
+
   return (
-    <section className="relative overflow-hidden bg-[#4A141D] py-24 px-6">
+    <section
+      className="
+        relative w-full
+        overflow-hidden
+        px-4 py-20
+        sm:px-6 sm:py-28
+      "
+      style={{
+        backgroundColor: COLORES.marfil,
+      }}
+    >
 
-      {/* Decoración */}
-      <div className="absolute -top-36 -left-24 w-[450px] h-[450px] bg-[#B88A8A]/20 rounded-full blur-3xl"></div>
+      {/* ======================================
+          DECORACIÓN SUPERIOR
+      ====================================== */}
 
-      <div className="absolute -bottom-40 -right-24 w-[380px] h-[380px] bg-[#F4E8DD]/10 rounded-full blur-3xl"></div>
+      <div
+        className="
+          pointer-events-none
+          absolute -left-20 -top-20
+          h-64 w-64 rounded-full
+          opacity-30 blur-3xl
+        "
+        style={{
+          backgroundColor: COLORES.champagne,
+        }}
+      />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div
+        className="
+          pointer-events-none
+          absolute -bottom-20 -right-20
+          h-72 w-72 rounded-full
+          opacity-30 blur-3xl
+        "
+        style={{
+          backgroundColor: COLORES.champagne,
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-5xl">
+
+        {/* ======================================
+            ENCABEZADO
+        ====================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.9 }}
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="font-cursiveDancing text-[#F4E8DD] text-5xl sm:text-6xl md:text-7xl">
+
+          {/* SUBTÍTULO SUPERIOR */}
+          <p
+            className="
+              mb-5 text-xs
+              uppercase tracking-[0.4em]
+              sm:text-sm
+            "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
+          >
             {titulo}
+          </p>
+
+          {/* TÍTULO CURSIVO */}
+          <h2
+            className="
+              pb-5 text-[78px]
+              leading-[1.2]
+              sm:text-[105px]
+              md:text-[125px]
+            "
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              color: COLORES.cafeOscuro,
+              fontWeight: 400,
+            }}
+          >
+            Días
           </h2>
 
-          <p className="mt-8 text-[#F8F2ED] text-lg sm:text-2xl md:text-3xl font-playfair max-w-3xl mx-auto leading-relaxed">
+          {/* DESCRIPCIÓN */}
+          <p
+            className="
+              mt-1 text-[11px]
+              uppercase tracking-[0.25em]
+              sm:text-sm
+              sm:tracking-[0.35em]
+            "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
+          >
             {texto}
           </p>
 
-          <div className="w-24 h-[2px] bg-[#B88A8A] mx-auto my-10"></div>
-
-          <p className="font-playfair italic text-[#F4E8DD] text-2xl sm:text-3xl">
-            {frase}
-          </p>
         </motion.div>
 
-        {/* CONTADOR */}
+        {/* ======================================
+            CONTADOR EN ARCOS
+        ====================================== */}
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
+          transition={{
+            duration: 1,
+            delay: 0.2,
+          }}
           viewport={{ once: true }}
           className="
-            mt-16
-            max-w-4xl
-            mx-auto
-            bg-[#F4E8DD]
-            rounded-[2rem]
-            shadow-[0_25px_70px_rgba(0,0,0,.35)]
-            p-8
+            mx-auto mt-12
+            grid max-w-[750px]
+            grid-cols-4
+            gap-2
+            sm:mt-16 sm:gap-4
+            md:gap-6
           "
         >
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {Object.entries(timeLeft).map(([item, valor], index) => (
 
-            {Object.keys(timeLeft).map((item) => (
+            <motion.div
+              key={item}
+              initial={{
+                opacity: 0,
+                y: 25,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.12,
+              }}
+              viewport={{ once: true }}
+              whileHover={{
+                y: -6,
+                transition: { duration: 0.25 },
+              }}
+              className="
+                relative flex
+                min-w-0 flex-col
+                items-center justify-center
+                rounded-t-full
+                px-1 pb-5 pt-8
+                shadow-[0_10px_25px_rgba(113,56,25,0.06)]
+                sm:pb-8 sm:pt-12
+                md:pb-10 md:pt-14
+              "
+              style={{
+                backgroundColor: COLORES.champagne,
+                backgroundImage: `
+                  linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.25),
+                    rgba(255,255,255,0.02)
+                  )
+                `,
+              }}
+            >
 
-              <motion.div
-                key={item}
-                whileHover={{ y: -5, scale: 1.04 }}
-                className="flex flex-col items-center"
+              {/* NÚMERO */}
+              <span
+                className="
+                  text-[30px]
+                  leading-none
+                  tabular-nums
+                  sm:text-5xl
+                  md:text-6xl
+                "
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 400,
+                  color: COLORES.cafeOscuro,
+                }}
               >
+                {String(valor).padStart(2, "0")}
+              </span>
 
-                <div
-                  className="
-                    w-20
-                    h-20
-                    sm:w-24
-                    sm:h-24
-                    rounded-full
-                    bg-[#4A141D]
-                    text-[#F4E8DD]
-                    flex
-                    items-center
-                    justify-center
-                    text-3xl
-                    sm:text-4xl
-                    font-bold
-                    shadow-xl
-                  "
-                >
-                  {timeLeft[item]}
-                </div>
+              {/* ETIQUETA */}
+              <span
+                className="
+                  mt-4 text-[8px]
+                  uppercase tracking-[0.06em]
+                  sm:mt-6 sm:text-xs
+                  sm:tracking-[0.16em]
+                "
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  color: COLORES.cafe,
+                }}
+              >
+                {item}
+              </span>
 
-                <span className="mt-4 uppercase tracking-[0.18em] text-[#4A141D] text-sm font-semibold">
-                  {item}
-                </span>
+            </motion.div>
 
-              </motion.div>
-
-            ))}
-
-          </div>
+          ))}
 
         </motion.div>
 
-      </div>
+        {/* ======================================
+            DECORACIÓN INFERIOR
+        ====================================== */}
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{
+            duration: 1,
+            delay: 0.5,
+          }}
+          viewport={{ once: true }}
+          className="
+            mt-12 flex
+            items-center justify-center
+            gap-4
+            sm:mt-16
+          "
+        >
+
+          <div
+            className="h-px w-16 sm:w-24"
+            style={{
+              backgroundColor: COLORES.cafe,
+              opacity: 0.5,
+            }}
+          />
+
+          <span
+            className="text-xl"
+            style={{
+              color: COLORES.naranja,
+            }}
+          >
+            ♥
+          </span>
+
+          <div
+            className="h-px w-16 sm:w-24"
+            style={{
+              backgroundColor: COLORES.cafe,
+              opacity: 0.5,
+            }}
+          />
+
+        </motion.div>
+
+        {/* MENSAJE CUANDO LLEGUE EL DÍA */}
+        {tiempoTerminado && (
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="
+              mt-6 text-center
+              text-2xl sm:text-3xl
+            "
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              color: COLORES.naranja,
+            }}
+          >
+            ¡Llegó nuestro gran día!
+          </motion.p>
+        )}
+
+      </div>
     </section>
   );
 };

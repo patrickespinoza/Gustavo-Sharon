@@ -1,16 +1,42 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Heart } from "lucide-react";
 
 // ==========================================
-// INFORMACIÓN EDITABLE - WEDLY PLUS
+// INFORMACIÓN EDITABLE - WEDLY
+// GUSTAVO & SHARON
 // ==========================================
 
-const imagenFinal = "/finalboda.webp";
+const FOTO_FINAL = {
+  src: "/final.jpg",
+  alt: "Fotografía final de Gustavo y Sharon",
 
-const iniciales = {
-  primera: "A",
-  segunda: "D",
+  // ========================================
+  // AJUSTAR POSICIÓN DE LA FOTOGRAFÍA
+  // ========================================
+
+  // Ejemplos:
+  // "center center" = Centrada
+  // "center 20%"    = Mostrar más la parte superior
+  // "center 70%"    = Mostrar más la parte inferior
+  // "left center"   = Mover el encuadre a la izquierda
+  // "right center"  = Mover el encuadre a la derecha
+
+  position: "center 30%",
+};
+
+// ==========================================
+// PALETA DE COLORES
+// ==========================================
+
+const COLORES = {
+  naranja: "#B9471B",
+  champagne: "#F1D5BF",
+  marfil: "#FFF8F0",
+  cafe: "#713819",
+  cafeOscuro: "#422314",
+  blanco: "#FFFFFF",
 };
 
 // ==========================================
@@ -21,107 +47,257 @@ const FinalBoda = () => {
   return (
     <section
       className="
-        relative
-        w-full
-        min-h-screen
+        relative w-full
         overflow-hidden
-        bg-[#4A141D]
       "
+      style={{
+        backgroundColor: COLORES.marfil,
+      }}
     >
-      {/* FOTOGRAFÍA DE FONDO */}
-      <img
-        src={imagenFinal}
-        alt="Fotografía final de los novios"
-        className="
-          absolute inset-0
-          h-full w-full
-          object-cover
-          object-center
-        "
-      />
 
-      {/* DEGRADADO INFERIOR PARA LAS INICIALES */}
+      {/* ======================================
+          FOTOGRAFÍA FINAL
+          SIN TEXTOS ENCIMA
+      ====================================== */}
+
       <div
         className="
-          pointer-events-none
-          absolute inset-0
-          bg-gradient-to-t
-          from-black/65
-          via-black/10
-          to-transparent
+          relative w-full
+          h-[85vh]
+          min-h-[580px]
+          sm:h-[95vh]
+          md:h-screen
+          overflow-hidden
         "
-      />
-
-      {/* INICIALES EN LA PARTE INFERIOR */}
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 35,
+        style={{
+          backgroundColor: COLORES.champagne,
         }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{ once: true }}
-        transition={{
-          duration: 1.2,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="
-          absolute
-          bottom-12 sm:bottom-16
-          left-0 right-0
-          z-10
-          flex flex-col
-          items-center
-          justify-center
-          px-5
-          text-center
-        "
       >
-        {/* ADORNO SUPERIOR */}
-        <div
+        <img
+          src={FOTO_FINAL.src}
+          alt={FOTO_FINAL.alt}
           className="
-            mb-6
-            h-px w-20
-            bg-[#F4E8DD]/80
+            absolute inset-0
+            h-full w-full
+            object-cover
           "
+          style={{
+            objectPosition: FOTO_FINAL.position,
+          }}
+          draggable={false}
         />
+      </div>
 
-        {/* INICIALES */}
-        <h2
+      {/* ======================================
+          MENSAJE FINAL DEBAJO DE LA FOTO
+      ====================================== */}
+
+      <div
+        className="
+          relative w-full
+          px-6 py-20
+          sm:px-8 sm:py-28
+        "
+        style={{
+          backgroundColor: COLORES.marfil,
+        }}
+      >
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 35,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className="
-            font-playfair
-            text-6xl sm:text-7xl md:text-8xl
-            font-normal
-            tracking-[0.08em]
-            text-[#F8F2ED]
-            drop-shadow-[0_4px_15px_rgba(0,0,0,0.65)]
+            mx-auto
+            flex max-w-3xl
+            flex-col items-center
+            text-center
           "
         >
-          {iniciales.primera}
-          <span
+
+          {/* ======================================
+              ADORNO SUPERIOR
+          ====================================== */}
+
+          <div
             className="
-              mx-3 sm:mx-5
-              font-cursiveDancing
-              font-normal
-              text-[#F4E8DD]
+              mb-10
+              flex items-center
+              justify-center gap-4
             "
           >
-            &
-          </span>
-          {iniciales.segunda}
-        </h2>
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+              }}
+            />
 
-        {/* ADORNO INFERIOR */}
-        <div
-          className="
-            mt-6
-            h-px w-20
-            bg-[#F4E8DD]/80
-          "
-        />
-      </motion.div>
+            <Heart
+              size={18}
+              strokeWidth={1.3}
+              style={{
+                color: COLORES.naranja,
+              }}
+            />
+
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+              }}
+            />
+          </div>
+
+          {/* ======================================
+              PRIMER PÁRRAFO
+          ====================================== */}
+
+          <p
+            className="
+              max-w-2xl
+              text-lg
+              leading-[2]
+              sm:text-xl
+              sm:leading-[2.1]
+            "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafeOscuro,
+            }}
+          >
+            Nuestro sueño de amor se convierte
+            en promesa delante de Dios.
+            Jesús será el centro de nuestro hogar
+            y su presencia, nuestra mayor bendición.
+          </p>
+
+          {/* ======================================
+              SEGUNDO PÁRRAFO
+          ====================================== */}
+
+          <p
+            className="
+              mt-9 max-w-2xl
+              text-lg
+              leading-[2]
+              sm:text-xl
+              sm:leading-[2.1]
+            "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
+          >
+            Con el corazón lleno de gratitud
+            y alegría, te esperamos para compartir
+            el inicio de nuestra historia más bonita.
+          </p>
+
+          {/* ======================================
+              FRASE FINAL DESTACADA
+          ====================================== */}
+
+          <motion.h2
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.9,
+              delay: 0.2,
+            }}
+            className="
+              mt-12
+              pb-5
+              text-[49px]
+              leading-[1.35]
+              sm:text-[68px]
+              md:text-[78px]
+            "
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontWeight: 400,
+              color: COLORES.naranja,
+            }}
+          >
+            ¡Te esperamos en
+            nuestro para siempre!
+          </motion.h2>
+
+          {/* ======================================
+              ADORNO INFERIOR
+          ====================================== */}
+
+          <div
+            className="
+              mt-5
+              flex items-center
+              justify-center gap-4
+            "
+          >
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+              }}
+            />
+
+            <Heart
+              size={18}
+              strokeWidth={1.3}
+              style={{
+                color: COLORES.naranja,
+              }}
+            />
+
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+              }}
+            />
+          </div>
+
+          {/* ======================================
+              NOMBRES DE LOS NOVIOS
+          ====================================== */}
+
+          <p
+            className="
+              mt-10
+              text-sm
+              uppercase
+              tracking-[0.2em]
+              sm:text-base
+            "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
+          >
+            Gustavo & Sharon
+          </p>
+
+
+
+        </motion.div>
+      </div>
+
     </section>
   );
 };

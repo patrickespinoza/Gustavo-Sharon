@@ -4,31 +4,39 @@ import { motion } from "framer-motion";
 import { Heart, Flower2 } from "lucide-react";
 
 // ==========================================
-// INFORMACIÓN EDITABLE - WEDLY PLUS
+// INFORMACIÓN EDITABLE - WEDLY
+// GUSTAVO & SHARON
 // ==========================================
 
-// PADRES DE LA NOVIA
-const padresNovia = {
-  titulo: "Padres de la novia",
-  padre: "Alejandro Mendoza",
-  madre: "Claudia Valdés",
+const mamaNovio = {
+  titulo: "Mamá del novio",
+  nombre: "Martha Alicia López Velázquez",
 };
 
-// PADRES DEL NOVIO
-const padresNovio = {
-  titulo: "Padres del novio",
-  padre: "Ricardo Navarro",
-  madre: "Mariana Salazar",
+const mamaNovia = {
+  titulo: "Mamá de la novia",
+  nombre: "Ana Fermín Rodríguez",
 };
 
-// TEXTOS DE LA SECCIÓN
 const textos = {
   subtitulo: "Con amor y gratitud",
-  titulo: "Nuestros padres",
+  titulo: "Nuestras Mamás",
   descripcion:
-    "Con la bendición y el amor de quienes nos han acompañado en cada paso de nuestra vida, queremos compartir contigo este día tan especial.",
+    "En compañía de las mamás de los novios.",
   fraseFinal:
-    "El amor que hoy celebramos también nace del amor de nuestras familias.",
+    "Con su amor y bendición, comenzamos este nuevo capítulo de nuestras vidas.",
+};
+
+// ==========================================
+// PALETA DE COLORES
+// ==========================================
+
+const COLORES = {
+  naranja: "#B9471B",
+  champagne: "#F1D5BF",
+  marfil: "#FFF8F0",
+  cafe: "#713819",
+  cafeOscuro: "#422314",
 };
 
 // ==========================================
@@ -51,152 +59,108 @@ const animacionTarjeta = {
 };
 
 // ==========================================
-// TARJETA DE PADRES
+// COMPONENTE PARA CADA MAMÁ
 // ==========================================
 
-const TarjetaPadres = ({ titulo, padre, madre }) => {
+const TarjetaMama = ({ titulo, nombre }) => {
   return (
     <motion.div
       variants={animacionTarjeta}
       className="
         relative
-        w-full
-        max-w-[450px]
-        overflow-hidden
-        rounded-tl-[3.5rem]
-        rounded-br-[3.5rem]
-        rounded-tr-[1rem]
-        rounded-bl-[1rem]
-        border border-[#B88A8A]/40
-        bg-[#F8F2ED]
-        px-6 py-12
-        sm:px-10 sm:py-14
+        flex w-full max-w-[440px]
+        flex-col items-center
+        justify-center
+        px-5 py-10
         text-center
-        shadow-[0_18px_50px_rgba(74,20,29,0.09)]
+        sm:px-10 sm:py-12
       "
     >
-      {/* LÍNEA SUPERIOR */}
-      <div
-        className="
-          absolute top-0 left-1/2
-          h-[3px] w-28
-          -translate-x-1/2
-          bg-[#B88A8A]
-        "
-      />
 
       {/* DECORACIÓN SUPERIOR */}
       <div
         className="
-          absolute -top-16 -right-16
-          h-44 w-44
+          mb-7
+          flex h-16 w-16
+          items-center justify-center
           rounded-full
-          border border-[#B88A8A]/20
-          pointer-events-none
+          border
         "
-      />
-
-      <div
-        className="
-          absolute -top-9 -right-9
-          h-28 w-28
-          rounded-full
-          border border-[#B88A8A]/20
-          pointer-events-none
-        "
-      />
-
-      <div className="relative z-10 flex flex-col items-center">
-
-        {/* ICONO */}
-        <div
-          className="
-            mb-7
-            flex h-16 w-16
-            items-center justify-center
-            rounded-full
-            border border-[#B88A8A]/45
-            bg-[#F4E8DD]
-          "
-        >
-          <Flower2
-            size={30}
-            strokeWidth={1.2}
-            className="text-[#4A141D]"
-          />
-        </div>
-
-        {/* TÍTULO */}
-        <h3
-          className="
-            font-playfair
-            text-xl sm:text-2xl
-            text-[#4A141D]
-          "
-        >
-          {titulo}
-        </h3>
-
-        {/* SEPARADOR */}
-        <div className="my-7 flex items-center gap-3">
-          <div className="h-[1px] w-10 bg-[#B88A8A]" />
-
-          <Heart
-            size={13}
-            strokeWidth={1.4}
-            className="text-[#B88A8A]"
-          />
-
-          <div className="h-[1px] w-10 bg-[#B88A8A]" />
-        </div>
-
-        {/* NOMBRES */}
-        <div className="flex flex-col items-center gap-4">
-
-          <p
-            className="
-              font-playfair
-              text-2xl sm:text-[1.8rem]
-              leading-snug
-              text-[#4A141D]
-            "
-          >
-            {padre}
-          </p>
-
-          <span
-            className="
-              font-cursiveDancing
-              text-3xl
-              text-[#B88A8A]
-            "
-          >
-            &
-          </span>
-
-          <p
-            className="
-              font-playfair
-              text-2xl sm:text-[1.8rem]
-              leading-snug
-              text-[#4A141D]
-            "
-          >
-            {madre}
-          </p>
-
-        </div>
+        style={{
+          borderColor: COLORES.champagne,
+          backgroundColor: COLORES.champagne,
+        }}
+      >
+        <Flower2
+          size={29}
+          strokeWidth={1.2}
+          style={{ color: COLORES.cafe }}
+        />
       </div>
 
-      {/* LÍNEA INFERIOR */}
+      {/* TÍTULO */}
+      <h3
+        className="
+          mb-6
+          text-xs uppercase
+          tracking-[0.22em]
+          sm:text-sm
+        "
+        style={{
+          fontFamily: "'Playfair Display', serif",
+          color: COLORES.cafe,
+        }}
+      >
+        {titulo}
+      </h3>
+
+      {/* NOMBRE */}
+      <p
+        className="
+          max-w-[360px]
+          text-[23px]
+          leading-relaxed
+          sm:text-[29px]
+        "
+        style={{
+          fontFamily: "'Playfair Display', serif",
+          color: COLORES.cafeOscuro,
+        }}
+      >
+        {nombre}
+      </p>
+
+      {/* SEPARADOR INFERIOR */}
       <div
         className="
-          absolute bottom-0 left-1/2
-          h-[3px] w-28
-          -translate-x-1/2
-          bg-[#B88A8A]
+          mt-8
+          flex items-center
+          justify-center gap-3
         "
-      />
+      >
+        <span
+          className="h-px w-12"
+          style={{
+            backgroundColor: COLORES.cafe,
+            opacity: 0.45,
+          }}
+        />
+
+        <Heart
+          size={14}
+          strokeWidth={1.4}
+          style={{ color: COLORES.naranja }}
+        />
+
+        <span
+          className="h-px w-12"
+          style={{
+            backgroundColor: COLORES.cafe,
+            opacity: 0.45,
+          }}
+        />
+      </div>
+
     </motion.div>
   );
 };
@@ -212,75 +176,97 @@ const Padres = () => {
         relative
         w-full
         overflow-hidden
-        bg-[#F4E8DD]
         px-5
-        py-20 sm:py-28
+        py-20
+        sm:py-28
       "
+      style={{
+        backgroundColor: COLORES.marfil,
+      }}
     >
-      {/* DECORACIONES DE FONDO */}
+
+      {/* ======================================
+          DECORACIONES DE FONDO
+      ====================================== */}
+
       <div
         className="
           pointer-events-none
-          absolute -left-40 top-20
+          absolute -left-32 -top-32
           h-80 w-80
           rounded-full
-          border border-[#B88A8A]/20
+          opacity-30
+          blur-3xl
         "
+        style={{
+          backgroundColor: COLORES.champagne,
+        }}
       />
 
       <div
         className="
           pointer-events-none
-          absolute -right-40 bottom-20
+          absolute -bottom-32 -right-32
           h-80 w-80
           rounded-full
-          border border-[#B88A8A]/20
+          opacity-30
+          blur-3xl
         "
+        style={{
+          backgroundColor: COLORES.champagne,
+        }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
 
-        {/* ENCABEZADO */}
+        {/* ======================================
+            ENCABEZADO
+        ====================================== */}
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          className="mb-14 text-center"
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9 }}
+          className="text-center"
         >
-          {/* ADORNO */}
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <div className="h-[1px] w-12 bg-[#B88A8A]" />
-
-            <Heart
-              size={20}
-              strokeWidth={1.3}
-              className="text-[#B88A8A]"
-            />
-
-            <div className="h-[1px] w-12 bg-[#B88A8A]" />
-          </div>
 
           {/* SUBTÍTULO */}
           <p
             className="
-              text-xs sm:text-sm
-              uppercase
-              tracking-[0.35em]
-              text-[#9B626B]
+              mb-4
+              text-xs uppercase
+              tracking-[0.3em]
+              sm:text-sm
             "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
           >
             {textos.subtitulo}
           </p>
 
-          {/* TÍTULO PRINCIPAL */}
+          {/* TÍTULO CURSIVO */}
           <h2
             className="
-              mt-5
-              font-cursiveDancing
-              text-5xl sm:text-6xl md:text-7xl
-              text-[#4A141D]
+              px-2 pb-5
+              text-[64px]
+              leading-[1.3]
+              sm:text-[85px]
+              md:text-[105px]
             "
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontWeight: 400,
+              color: COLORES.cafeOscuro,
+            }}
           >
             {textos.titulo}
           </h2>
@@ -288,63 +274,155 @@ const Padres = () => {
           {/* DESCRIPCIÓN */}
           <p
             className="
-              mx-auto mt-7
-              max-w-2xl
-              font-playfair
-              text-base sm:text-lg
+              mx-auto mt-2
+              max-w-xl
+              text-base
               leading-relaxed
-              text-[#4A141D]/80
+              sm:text-lg
             "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
           >
             {textos.descripcion}
           </p>
+
+          {/* SEPARADOR */}
+          <div
+            className="
+              mt-8
+              flex items-center
+              justify-center gap-4
+            "
+          >
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+                opacity: 0.5,
+              }}
+            />
+
+            <Heart
+              size={16}
+              strokeWidth={1.3}
+              style={{ color: COLORES.naranja }}
+            />
+
+            <span
+              className="h-px w-16"
+              style={{
+                backgroundColor: COLORES.cafe,
+                opacity: 0.5,
+              }}
+            />
+          </div>
+
         </motion.div>
 
-        {/* TARJETAS DE PADRES */}
+        {/* ======================================
+            NOMBRES DE LAS MAMÁS
+        ====================================== */}
+
         <motion.div
           initial="oculto"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ staggerChildren: 0.18 }}
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          transition={{
+            staggerChildren: 0.2,
+          }}
           className="
-            grid grid-cols-1
-            items-stretch
+            relative
+            mx-auto mt-12
+            grid max-w-5xl
+            grid-cols-1
+            items-center
             justify-items-center
-            gap-8 lg:gap-10
+            md:mt-16
             md:grid-cols-2
           "
         >
-          <TarjetaPadres {...padresNovia} />
 
-          <TarjetaPadres {...padresNovio} />
+          {/* DIVISOR CENTRAL - ESCRITORIO */}
+          <div
+            className="
+              pointer-events-none
+              absolute left-1/2 top-1/2
+              hidden h-44 w-px
+              -translate-x-1/2
+              -translate-y-1/2
+              md:block
+            "
+            style={{
+              backgroundColor: COLORES.cafe,
+              opacity: 0.35,
+            }}
+          />
+
+          {/* MAMÁ DEL NOVIO */}
+          <TarjetaMama {...mamaNovio} />
+
+          {/* MAMÁ DE LA NOVIA */}
+          <TarjetaMama {...mamaNovia} />
+
         </motion.div>
 
-        {/* FRASE FINAL */}
+        {/* ======================================
+            FRASE FINAL
+        ====================================== */}
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16 text-center"
+          transition={{
+            duration: 0.9,
+            delay: 0.2,
+          }}
+          className="
+            mx-auto mt-10
+            max-w-2xl
+            text-center
+            sm:mt-16
+          "
         >
+
           <Flower2
             size={25}
-            strokeWidth={1.2}
-            className="mx-auto mb-5 text-[#B88A8A]"
+            strokeWidth={1.1}
+            className="mx-auto mb-6"
+            style={{
+              color: COLORES.naranja,
+            }}
           />
 
           <p
             className="
-              mx-auto max-w-xl
-              font-playfair
-              text-lg sm:text-xl
-              italic leading-relaxed
-              text-[#4A141D]/85
+              text-base
+              italic
+              leading-loose
+              sm:text-xl
             "
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: COLORES.cafe,
+            }}
           >
             {textos.fraseFinal}
           </p>
+
         </motion.div>
+
       </div>
     </section>
   );

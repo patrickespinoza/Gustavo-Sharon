@@ -287,9 +287,7 @@ const Regalos = () => {
             <br />
             <br />
 
-            Si deseas tener un detalle con
-            nosotros, puedes hacerlo mediante
-            una transferencia bancaria.
+            Si deseas tener un detalle adicional con nosotros, puedes hacerlo mediante un regalo físico o una transferencia bancaria. ¡Agradecemos de corazón tus muestras de cariño!
           </p>
 
           {/* ======================================
